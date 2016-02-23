@@ -88,16 +88,6 @@ public class ColorFormat {
         updateByRgb();
     }
 
-//    private void convertLuvToCmy() {
-//        convertLuvToRgb();
-//        convertRgbToCmy();
-//    }
-//
-//    private void convertLuvToHsv() {
-//        convertLuvToRgb();
-//        convertRgbToHsv();
-//    }
-
     private void convertCmyToHsv() {
         convertCmyToRgb();
         convertRgbToHsv();
