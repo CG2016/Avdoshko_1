@@ -68,7 +68,7 @@ public class Form {
             @Override
             public void actionPerformed(ActionEvent e) {
                 imageAfter.setBufferedImage(Converter.convert(
-                        imageBefore.getBufferedImage(), colorBefore, colorAfter, sliderDistance.getValue())
+                        imageBefore.getBufferedImage(), colorBefore, colorAfter, sliderDistance.getValue()*0.52)
                 );
                 rightImage.setIcon(new ImageIcon(imageAfter.getBufferedImage().getScaledInstance(300, 300, java.awt.Image.SCALE_AREA_AVERAGING)));
             }

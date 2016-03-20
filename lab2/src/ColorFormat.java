@@ -85,7 +85,7 @@ public class ColorFormat {
 
     public void updateByLuv() {
         convertLuvToRgb();
-        updateByRgb();
+     //   updateByRgb();
     }
 
     private void convertCmyToHsv() {

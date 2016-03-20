@@ -26,8 +26,8 @@ public class Converter {
                 tmpColor.setL(colorAfter.getL()+(int) (distances[0]));
                 tmpColor.setU(colorAfter.getU()+(int) (distances[1]));
                 tmpColor.setV(colorAfter.getV()+(int) (distances[2]));
+                tmpColor.updateByLuv();
             }
-            tmpColor.updateByLuv();
             c = new Color(tmpColor.getRed(), tmpColor.getGreen(), tmpColor.getBlue());
             dataBuffInt[i] = c.getRGB();
         }
@@ -41,9 +41,9 @@ public class Converter {
 
     private static double[] distance(ColorFormat a, ColorFormat b) {
         double[] distance = new double[3];
-        distance[0] = a.getL() - b.getL();
-        distance[1] = a.getU() - b.getU();
-        distance[2] = a.getV() - b.getV();
+        distance[0] = Math.abs(a.getL() - b.getL());
+        distance[1] = Math.abs(a.getU() - b.getU());
+        distance[2] = Math.abs(a.getV() - b.getV());
         return distance;
     }
 
