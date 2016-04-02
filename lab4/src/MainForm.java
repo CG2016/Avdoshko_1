@@ -1,12 +1,9 @@
-import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by Evgeny on 27.03.2016.
@@ -27,14 +24,33 @@ public class MainForm extends JFrame {
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "Images", "jpg", "gif", "png", "bmp", "tif");
         fileChooser.setFileFilter(filter);
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 
         menuItemOpenImage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 fileChooser.showOpenDialog(panel);
-                File chosenFile = fileChooser.getSelectedFile();
-                MetadataRetriever metadataRetriever = new MetadataRetriever(chosenFile);
-                infoTextArea.setText(metadataRetriever.retrieveMetadata());
+                File file = fileChooser.getSelectedFile();
+                long startTime = System.nanoTime();
+                if (file.isFile()) {
+                    MetadataRetriever metadataRetriever = new MetadataRetriever(file);
+                    infoTextArea.setText(metadataRetriever.retrieveMetadata());
+                } else if (file.isDirectory()) {
+                    File[] files = file.listFiles();
+                    StringBuilder info = new StringBuilder();
+                    for (File imageFile: files) {
+                        try {
+                            MetadataRetriever metadataRetriever = new MetadataRetriever(imageFile);
+                            info.append(metadataRetriever.retrieveMetadata());
+                        }
+                        catch(Exception ex) {
+                            // ignore
+                        }
+                    }
+                    infoTextArea.setText(info.toString());
+                }
+                long finishTime = System.nanoTime();
+                JOptionPane.showMessageDialog(null, (finishTime - startTime)/1.E9 + "s.");
             }
         });
         return menuBar;
