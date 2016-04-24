@@ -1,0 +1,65 @@
+package rasterizer.line;
+
+import java.awt.*;
+import java.util.*;
+import java.util.List;
+
+
+/**
+ * Created by Evgeny on 24.04.2016.
+ */
+public class DdaLineRasterizer implements LineRasterizer {
+    @Override
+    public double[][] rasterize(Point start, Point end) {
+        int l = Math.max(Math.abs(end.x - start.x), Math.abs(end.y - start.y));
+        double[][] points = new double[2][l];
+
+        double stepX = (end.x - start.x)*1.0 / l;
+        double stepY = (end.y - start.y)*1.0 / l;
+
+        double x = start.x;
+        double y = start.y;
+        for (int i = 0; i < l; i++) {
+            points[0][i] = x;
+            points[1][i] = y;
+            x += stepX;
+            y += stepY;
+        }
+        points[0][l-1] = end.x;
+        points[1][l-1] = end.y;
+        return points;
+//        List<Point> pointList = new ArrayList<>();
+//
+//        double deltaX = end.x - start.x;
+//        double deltaY = end.y - start.y;
+//
+//        int stepsCount = (int) Math.max(Math.abs(deltaX), Math.abs(deltaY));
+//
+//        double xInc = deltaX / stepsCount;
+//        double yInc = deltaY / stepsCount;
+//
+//        double x = start.x;
+//        double y = start.y;
+//        for (int i = 0; i < stepsCount; i++) {
+//            pointList.add(new Point((int) x, (int) y));
+//            x += xInc;
+//            y += yInc;
+//        }
+//        pointList.add(end);
+//        return convertPointsList(pointList);
+    }
+
+    private double[][] convertPointsList(java.util.List<Point> pointsList) {
+        double[][] pointsArray = new double[2][pointsList.size()];
+        for (int i=0; i<pointsList.size(); i++) {
+            pointsArray[0][i] = pointsList.get(i).x;
+            pointsArray[1][i] = pointsList.get(i).y;
+        }
+        return pointsArray;
+    }
+
+    @Override
+    public String toString() {
+        return "DDA Algorithm";
+    }
+}
