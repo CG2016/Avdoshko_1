@@ -28,25 +28,6 @@ public class DdaLineRasterizer implements LineRasterizer {
         points[0][l-1] = end.x;
         points[1][l-1] = end.y;
         return points;
-//        List<Point> pointList = new ArrayList<>();
-//
-//        double deltaX = end.x - start.x;
-//        double deltaY = end.y - start.y;
-//
-//        int stepsCount = (int) Math.max(Math.abs(deltaX), Math.abs(deltaY));
-//
-//        double xInc = deltaX / stepsCount;
-//        double yInc = deltaY / stepsCount;
-//
-//        double x = start.x;
-//        double y = start.y;
-//        for (int i = 0; i < stepsCount; i++) {
-//            pointList.add(new Point((int) x, (int) y));
-//            x += xInc;
-//            y += yInc;
-//        }
-//        pointList.add(end);
-//        return convertPointsList(pointList);
     }
 
     private double[][] convertPointsList(java.util.List<Point> pointsList) {
