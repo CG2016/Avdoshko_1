@@ -25,8 +25,8 @@ public class DdaLineRasterizer implements LineRasterizer {
             x += stepX;
             y += stepY;
         }
-        points[0][l-1] = end.x;
-        points[1][l-1] = end.y;
+//        points[0][l-1] = end.x;
+//        points[1][l-1] = end.y;
         return points;
     }
 

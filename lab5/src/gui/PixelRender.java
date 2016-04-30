@@ -26,6 +26,7 @@ class PixelRender extends XYLineAndShapeRenderer {
         super();
         setBaseLinesVisible(false);
         setBaseShapesVisible(true);
+        setUseOutlinePaint(true);
     }
 
     @Override
@@ -51,8 +52,8 @@ class PixelRender extends XYLineAndShapeRenderer {
             RectangleEdge domainEdge = plot.getDomainAxisEdge();
             RectangleEdge rangeEdge = plot.getRangeAxisEdge();
             double widthms = 1;
-            double left = dataset.getXValue(series, item) - widthms;
-            double top = dataset.getYValue(series, item) - widthms;
+            double left = (int) dataset.getXValue(series, item) - widthms;
+            double top = (int) dataset.getYValue(series, item) - widthms;
 
             for (int j = 0; j < 2; ++j) {
                 double right = left + widthms;

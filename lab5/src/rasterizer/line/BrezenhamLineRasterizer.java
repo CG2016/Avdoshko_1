@@ -29,7 +29,7 @@ public class BrezenhamLineRasterizer implements LineRasterizer {
                 y += signY;
             }
         }
-        points.add(end);
+//        points.add(end);
         return convertPointsList(points);
     }
 
